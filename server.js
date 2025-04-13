@@ -4,18 +4,24 @@
 import { ApolloServer, gql } from "apollo-server";
 
 const typeDefs = gql`
-  type Director {
-    id: ID
-    name: String
+  type User {
+    id: ID!
+    username: String!
+    firstname: String!
+    lastname: String
   }
-  type Movie {
-    id: ID
-    title: String
-    director: Director
+  type Tweet {
+    id: ID!
+    title: String!
+    author: User!
   }
   type Query {
-    allMoview: [Movie]
-    movie(id: ID): Movie
+    allTweets: [Tweet!]!
+    tweet(id: ID!): Tweet
+  }
+  type Mutation {
+    postTweet(title: String!, userID: ID!): Tweet!
+    deleteTweet(id: ID!): Boolean
   }
 `;
 
